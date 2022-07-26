@@ -1,0 +1,46 @@
+<div class="container pt-5">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-5 col-10 bg-white shadow rounded-3 mt-5 p-5">
+      <h1>Consulta de Envío</h1>
+
+      <form [formGroup]="form" (ngSubmit)="makeConsult()" autocomplete="off">
+        <div class="form-floating mb-3">
+          <input  type="tel" 
+                  (keyup)="onlyNumber(0)"
+                  class="form-control" 
+                  id="delivery_code" 
+                  formControlName="delivery_code" 
+                  placeholder="Código de Pedido">
+          <label for="delivery_code">Código de Pedido</label>
+          <div class="text-danger" *ngIf="form.get('error_delivery_code')?.value">{{ form.get('error_delivery_code')?.value }}</div>
+        </div>
+        <div class="form-floating mb-3">
+          <select class="form-select" 
+                  id="document_type" 
+                  (change)="clearError()"
+                  formControlName="document_type" 
+                  aria-label="Tipo de Documento">
+            <option value="" selected>Selecciona una Opción</option>
+            <ng-container *ngFor="let _dt of doc_type">
+              <option [value]="_dt.value">{{ _dt.label }}</option>
+            </ng-container>
+          </select>
+          <label for="document_type">Tipo de Documento</label>
+          <div class="text-danger" *ngIf="form.get('error_document_type')?.value">{{ form.get('error_document_type')?.value }}</div>
+        </div>
+        <div class="form-floating">
+          <input  type="tel" 
+                  (keyup)="onlyNumber(1)"
+                  class="form-control" 
+                  id="document_number" 
+                  formControlName="document_number" 
+                  placeholder="Número de Documento">
+          <label for="document_number">Número de Documento</label>
+          <div class="text-danger" *ngIf="form.get('error_document_number')?.value">{{ form.get('error_document_number')?.value }}</div>
+        </div>
+        <button type="submit" class="btn btn-success w-100 btn-block my-4 fs-4">Consultar</button>
+      </form>
+
+    </div>
+  </div>
+</div>
